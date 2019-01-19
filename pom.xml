@@ -59,7 +59,7 @@
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-				<url>http://192.168.186.101:8080/manager/text</url> 
+				<url>https://rudy.utools.club:8080/manager/text</url> 
 					<path>/ROOT</path>
 					<server>tomcat</server>
 					<username>admin</username>
