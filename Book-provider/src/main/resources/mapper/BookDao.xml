@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间指向dao接口 -->
+<mapper namespace="com.jin.dao.BookMapper">
+	<!-- <insert id="addBook">
+		insert into t_book (bookname,bookcode,begintime,booktype,state) value (#{bookName},#{bookCode},#{beginTime},#{bookType},#{state})
+	</insert>
+	<update id="editBook" parameterType="map">
+		update t_book set Bookno = #{BookNo},Bookstatus = #{BookStatus},Booktype = #{BookType},Booketel = #{BookEtel},remark = #{remark},Bookname = #{BookName}
+		where Bookid = #{BookId}
+	</update>
+	<delete id="delBookById">
+		delete  from t_book where Bookid = #{BookId}
+	</delete> -->
+	<select id="findAllBook" parameterType="map" resultType="map">
+
+		select Book.*,BookType.typeName from t_book Book,t_booktype BookType where Book.Booktype = Booktype.typeid
+
+
+		<if test="bookCode!=null and bookCode!=''">
+				and Book.bookcode like concat(concat('%',#{bookCode}),'%')
+
+		</if>
+
+
+		<if test="sort!=null and sort!=''">
+			order by ${sort}
+			<choose>
+				<when test=" order == 'descending' ">
+					desc
+				</when >
+				<when test=" order == 'ascending' ">
+					asc
+				</when >
+				<otherwise>
+				</otherwise>
+			</choose>
+		</if>
+
+	</select>
+<!-- 	<select id="getTotal" resultType="java.lang.Integer">
+		select count(*) totalrow from t_book
+	</select>
+	<select id="findAllBookType" resultType="map">
+		select * from t_booktype
+	</select>
+	<select id="searchBookCode" parameterType="string" resultType="java.lang.String">
+		select bookcode from t_book where bookcode like concat(concat('%',#{bookCode}),'%')
+	</select> -->
+</mapper>
